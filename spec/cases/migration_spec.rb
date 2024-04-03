@@ -348,6 +348,10 @@ RSpec.describe 'Migration', :migrations do
     end
 
     context 'function creation' do
+      after do
+        ActiveRecord::Base.connection.drop_function('some_fun')
+      end
+      
       context 'plain' do
         it 'creates a function' do
           migrations_dir = File.join(FIXTURES_PATH, 'migrations', 'plain_function_creation')
