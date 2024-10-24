@@ -33,7 +33,7 @@ module ClickhouseActiverecord
 
     def structure_dump(*args)
       tables = connection.execute("SHOW TABLES FROM #{@configuration['database']}")['data'].flatten
-      functions = connection.execute("SELECT create_query FROM system.functions WHERE origin = 'SQLUserDefined'")['data'].flatten
+      functions = connection.execute("SELECT create_query FROM system.functions WHERE origin = 'SQLUserDefined' ORDER BY name")['data'].flatten
 
       File.open(args.first, 'w:utf-8') do |file|
         functions.each do |function|
