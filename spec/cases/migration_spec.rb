@@ -357,7 +357,7 @@ RSpec.describe 'Migration', :migrations do
           migrations_dir = File.join(FIXTURES_PATH, 'migrations', 'plain_function_creation')
           quietly { ClickhouseActiverecord::MigrationContext.new(migrations_dir, model.connection.schema_migration).up }
 
-          expect(ActiveRecord::Base.connection.functions).to match_array(['some_fun'])
+          expect(ActiveRecord::Base.connection.functions).to match_array(['addFun', 'multFun'])
         end
       end
 
